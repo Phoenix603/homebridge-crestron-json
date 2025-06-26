@@ -1,0 +1,49 @@
+{
+  "name": "homebridge-crestron-json",
+  "displayName": "Crestron Bridge",
+  "version": "0.1.2",
+  "private": false,
+  "description": "A Homebridge plugin that exposes Crestron devices as HomeKit accessories, allowing you to control your Crestron system through Apple's Home app and Siri.",
+  "author": "Aleksei Zakharov",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/phoenix603/homebridge-crestron#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phoenix603/homebridge-crestron.git"
+  },
+  "bugs": {
+    "url": "https://github.com/phoenix603/homebridge-crestron/issues"
+  },
+  "keywords": [
+    "homebridge-plugin",
+    "homebridge-crestron-json",
+    "crestron-json",
+    "homekit",
+    "automation"
+  ],
+  "main": "dist/index.js",
+  "engines": {
+    "node": "^18.20.4 || ^20.18.0 || ^22.10.0",
+    "homebridge": "^1.8.0 || ^2.0.0-beta.0"
+  },
+  "scripts": {
+    "build": "rimraf ./dist && tsc",
+    "lint": "eslint . --max-warnings=0",
+    "prepublishOnly": "npm run lint && npm run build",
+    "watch": "npm run build && npm link && nodemon"
+  },
+  "dependencies": {
+    "homebridge-lib": "^7.1.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@types/node": "^22.13.5",
+    "eslint": "^9.21.0",
+    "homebridge": "^2.0.0-beta.0",
+    "nodemon": "^3.1.9",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.1"
+  }
+}
