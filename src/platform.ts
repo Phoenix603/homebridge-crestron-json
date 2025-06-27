@@ -3,6 +3,7 @@ import { EventEmitter } from 'events';
 import { PLATFORM_NAME, PLUGIN_NAME } from './settings';
 
 import { LightbulbAccessory } from './Accessories/LightbulbAccessory';
+import { SwitchAccessory } from './Accessories/SwitchAccessory';
 import { CrestronConnector } from './crestronConnector';
 
 interface DeviceConfig {
@@ -101,6 +102,10 @@ export class HomebridgePlatform implements DynamicPlatformPlugin {
     const configLightbulbs = this.config.lightbulbs || [];
     this.registerDevices(configLightbulbs, 'Lightbulb');
 
+    // Register switch devices
+    const configSwitches = this.config.switches || [];
+    this.registerDevices(configSwitches, 'Switch');
+
     // Clean up accessories that are no longer present
     this.cleanupRemovedAccessories();
   }
@@ -138,6 +143,9 @@ export class HomebridgePlatform implements DynamicPlatformPlugin {
         case 'Lightbulb':
           new LightbulbAccessory(this, existingAccessory, this.eventEmitter);
           break;
+        case 'Switch':
+          new SwitchAccessory(this, existingAccessory, this.eventEmitter);
+          break;
         default:
           this.log.warn(`Unknown device type: ${deviceType}`);
         }
@@ -156,6 +164,9 @@ export class HomebridgePlatform implements DynamicPlatformPlugin {
         switch (deviceType) {
         case 'Lightbulb':
           new LightbulbAccessory(this, accessory, this.eventEmitter);
+          break;
+        case 'Switch':
+          new SwitchAccessory(this, accessory, this.eventEmitter);
           break;
         default:
           this.log.warn(`Unknown device type: ${deviceType}`);

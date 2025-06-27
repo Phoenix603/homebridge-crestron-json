@@ -51,6 +51,30 @@
           },
           "required": ["id", "name"]
         }
+      },
+      "switches": {
+        "title": "Switch Devices",
+        "type": "array",
+        "description": "Configure your Crestron switch devices",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "title": "Device ID",
+              "type": "number",
+              "description": "Unique identifier for this device in Crestron",
+              "required": true,
+              "minimum": 1
+            },
+            "name": {
+              "title": "Device Name",
+              "type": "string",
+              "description": "Display name for this device in HomeKit",
+              "required": true
+            }
+          },
+          "required": ["id", "name"]
+        }
       }
     },
     "required": ["name", "host"]

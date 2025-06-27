@@ -5,6 +5,7 @@ A Homebridge plugin that exposes Crestron devices as HomeKit accessories, allowi
 ## Features
 
 - **Lightbulb Control**: Control Crestron lighting devices with on/off and brightness functionality
+- **Switch Control**: Control Crestron switch devices with on/off functionality
 - **Real-time Communication**: Bidirectional communication with Crestron processors via TCP/IP
 - **Automatic Reconnection**: Handles network disconnections and automatically reconnects
 - **JSON Protocol**: Uses JSON for structured communication with Crestron systems
@@ -38,6 +39,16 @@ Add the following to your Homebridge `config.json`:
           "id": 2,
           "name": "Kitchen Light"
         }
+      ],
+      "switches": [
+        {
+          "id": 1,
+          "name": "Living Room Fan"
+        },
+        {
+          "id": 2,
+          "name": "Kitchen Outlet"
+        }
       ]
     }
   ]
@@ -53,10 +64,20 @@ Add the following to your Homebridge `config.json`:
 | `host`       | string | Yes      | -       | IP address or hostname of your Crestron processor |
 | `port`       | number | No       | 50005   | TCP port for Crestron communication               |
 | `lightbulbs` | array  | No       | []      | Array of lightbulb device configurations          |
+| `switches`   | array  | No       | []      | Array of switch device configurations             |
 
 ### Lightbulb Device Configuration
 
 Each lightbulb device requires:
+
+| Option | Type   | Required | Description                                               |
+| ------ | ------ | -------- | --------------------------------------------------------- |
+| `id`   | number | Yes      | Unique identifier for this device in your Crestron system |
+| `name` | string | Yes      | Display name for this device in HomeKit                   |
+
+### Switch Device Configuration
+
+Each switch device requires:
 
 | Option | Type   | Required | Description                                               |
 | ------ | ------ | -------- | --------------------------------------------------------- |
@@ -71,6 +92,8 @@ This plugin communicates with Crestron using JSON messages. The protocol expects
 
 #### Commands sent to Crestron:
 
+**Lightbulb commands:**
+
 ```json
 {
   "deviceType": "Lightbulb",
@@ -86,11 +109,24 @@ This plugin communicates with Crestron using JSON messages. The protocol expects
   "id": 1,
   "command": "brightness",
   "value": 75
+}
+```
+
+**Switch commands:**
+
+```json
+{
+  "deviceType": "Switch",
+  "id": 1,
+  "command": "power",
+  "value": true
 }
 ```
 
 #### Responses expected from Crestron:
 
+**Lightbulb responses:**
+
 ```json
 {
   "deviceType": "Lightbulb",
@@ -106,6 +142,17 @@ This plugin communicates with Crestron using JSON messages. The protocol expects
   "id": 1,
   "command": "brightness",
   "value": 75
+}
+```
+
+**Switch responses:**
+
+```json
+{
+  "deviceType": "Switch",
+  "id": 1,
+  "command": "power",
+  "value": true
 }
 ```
 
@@ -194,5 +241,6 @@ If you encounter any issues or have questions:
 
 - Initial release
 - Lightbulb accessory support
+- Switch accessory support
 - JSON-based communication protocol
 - Automatic reconnection handling

@@ -1,7 +1,7 @@
 {
   "name": "homebridge-crestron-json",
   "displayName": "Crestron Bridge",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "private": false,
   "description": "A Homebridge plugin that exposes Crestron devices as HomeKit accessories, allowing you to control your Crestron system through Apple's Home app and Siri.",
   "author": "Aleksei Zakharov",
